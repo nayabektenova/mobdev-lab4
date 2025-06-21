@@ -1,19 +1,23 @@
 import React, { useState } from 'react';
-import './App.css'; 
-
+import './App.css';
+import ToDoForm from './ToDoForm.jsx';
 
 function App() {
-  //part a
-  const [tasks] = useState([
+  const [tasks, setTasks] = useState([
     'Do laundry',
     'Go to gym',
     'Walk dog'
   ]);
 
+  const addTask = (taskText) => {
+    if (!taskText.trim()) return;
+    setTasks([...tasks, taskText]);
+  };
+
   return (
     <div className="App">
       <h1>My ToDo List</h1>
-      {/*part b*/}
+      <ToDoForm addTask={addTask} />
       <ToDoList tasks={tasks} />
     </div>
   );
@@ -24,7 +28,7 @@ function ToDoList({ tasks }) {
     <ul>
       {tasks.map((task, index) => (
         <li key={index}>
-          {task} {/*render each task*/}
+          {task}
         </li>
       ))}
     </ul>
